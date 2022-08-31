@@ -5,7 +5,7 @@ def captura():
     operaciones = list()
     primerosperandos = list()
     segundosoperandos = list()
-    tme.s = list()
+    tmes = list()
     Ids = list()
     x = 1
     y = 1
@@ -13,6 +13,7 @@ def captura():
     os.system("cls")
     
     while x != 0:
+        print("Captura de procesos")
         while y != 0:
             programador = input("Nombre del programador: ")
             operacion = input("Operación: ")
@@ -26,8 +27,9 @@ def captura():
                 operaciones.append(operacion)
                 primerosperandos.append(primeroperando)
                 segundosoperandos.append(segundooperando)
-                tme.s.append(tme)
+                tmes.append(tme)
                 Ids.append(Id)
+                y = 0
             else: 
                 print("No se agregó el proceso") 
                 

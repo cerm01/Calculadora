@@ -1,12 +1,6 @@
 import os
 
-def captura():
-    programadores = list()
-    operaciones = list()
-    primerosperandos = list()
-    segundosoperandos = list()
-    tmes = list()
-    Ids = list()
+def captura(programadores, operaciones, primerosperandos, segundosoperandos, tmes, Ids):
     x = 1
     y = 1
         
@@ -65,7 +59,7 @@ def validacion(operacion, segundooperando, tme, Id, Ids):
     return valor
 
 
-def procesar():
+def procesar(programadores, operaciones, primerosperandos, segundosoperandos, tmes, Ids):
     pass
 
 
@@ -85,16 +79,23 @@ def validacion_menu(opcion):
 
 
 def main():
+    programadores = list()
+    operaciones = list()
+    primerosperandos = list()
+    segundosoperandos = list()
+    tmes = list()
+    Ids = list()
     opcion = 0
+
     while opcion != 2:
         menu()
         opcion = input("Seleccione una opción: ")
         if opcion == 1:
             os.system("cls")
-            captura()
+            captura(programadores, operaciones, primerosperandos, segundosoperandos, tmes, Ids)
         elif opcion == 2:
             os.system("cls")
-            pass
+            procesar(programadores, operaciones, primerosperandos, segundosoperandos, tmes, Ids)
         else:
             print("Opción no válida")
             os.system("pause")

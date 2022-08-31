@@ -8,11 +8,13 @@ def captura(programadores, operaciones, primerosperandos, segundosoperandos, tme
         print("Captura de procesos")
         while y != 0:
             programador = input("Nombre del programador: ")
-            operacion = input("Operación: ")
+            print("Operaciones validas : +, -, *, /, //, **")
+            operacion = str(input("Operación: "))
             primeroperando = int(input("Primer operando: "))
             segundooperando = int(input("Segundo operando: "))
             tme = int(input("Tiempo de ejecución: "))
             Id = int(input("Id: "))
+            os.system("cls")
 
             if validacion(operacion, segundooperando, tme, Id, Ids) == 0:
                 programadores.append(programador)
@@ -23,7 +25,9 @@ def captura(programadores, operaciones, primerosperandos, segundosoperandos, tme
                 Ids.append(Id)
                 y = 0
             else: 
-                print("No se agregó el proceso") 
+                print("No se agregó el proceso")
+                os.system("pause")
+                os.system("cls")
                 
         x = int(input("¿Desea capturar otro proceso? 1.- Si 2.- No: "))
         if x == 1:
@@ -39,11 +43,13 @@ def captura(programadores, operaciones, primerosperandos, segundosoperandos, tme
 
 def validacion(operacion, segundooperando, tme, Id, Ids):
     valor = 0
-    if operacion != ("+" or "-" or "*" or "/" or "//" or "**"):
+    if operacion == "+" or operacion == "-" or operacion == "*" or operacion == "/" or operacion == "//" or operacion =="**":
+        pass
+    else:
         print("Operación no válida")
         valor += 1
 
-    if operacion == ("/" or "//") and segundooperando == 0:
+    if (operacion == "/" or operacion == "//") and segundooperando == 0:
         print("No se puede dividir entre 0")
         valor += 1
 
@@ -52,7 +58,7 @@ def validacion(operacion, segundooperando, tme, Id, Ids):
         valor += 1
     
     for i in range(0, len(Ids)):
-        if Id[i] == Id:
+        if Ids[i] == Id:
             print("El Id ya existe")
             valor += 1
 
@@ -76,6 +82,9 @@ def validacion_menu(opcion):
         os.system("cls")
     else:
         opcion = int(opcion)
+    
+    return opcion
+    
 
 
 def main():
@@ -90,6 +99,7 @@ def main():
     while opcion != 2:
         menu()
         opcion = input("Seleccione una opción: ")
+        opcion = validacion_menu(opcion)
         if opcion == 1:
             os.system("cls")
             captura(programadores, operaciones, primerosperandos, segundosoperandos, tmes, Ids)

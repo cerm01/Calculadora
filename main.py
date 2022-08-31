@@ -9,9 +9,7 @@ def captura():
     Ids = list()
     x = 1
     y = 1
-    #Limpiar pantalla
-    os.system("cls")
-    
+        
     while x != 0:
         print("Captura de procesos")
         while y != 0:
@@ -35,12 +33,14 @@ def captura():
                 
         x = int(input("¿Desea capturar otro proceso? 1.- Si 2.- No: "))
         if x == 1:
-            pass
+            y = 1
         elif x == 2:
             x = 0
         else:
             print("Opción no válida")
+            os.system("pause")
             x = 0
+        os.system("cls")
 
 
 def validacion(operacion, segundooperando, tme, Id, Ids):
@@ -65,20 +65,40 @@ def validacion(operacion, segundooperando, tme, Id, Ids):
     return valor
 
 
+def procesar():
+    pass
+
+
 def menu():
     print("1.- Capturar procesos")
     print("2.- Procesar lotes")
 
 
-def main():
-    menu()
-    opcion = int(input("Seleccione una opción: "))
-    if opcion == 1:
-        captura()
-    elif opcion == 2:
-        pass
-    else:
+def validacion_menu(opcion):
+    if opcion.isnumeric() == False:
+        opcion = 0
         print("Opción no válida")
+        os.system("pause")
+        os.system("cls")
+    else:
+        opcion = int(opcion)
+
+
+def main():
+    opcion = 0
+    while opcion != 2:
+        menu()
+        opcion = input("Seleccione una opción: ")
+        if opcion == 1:
+            os.system("cls")
+            captura()
+        elif opcion == 2:
+            os.system("cls")
+            pass
+        else:
+            print("Opción no válida")
+            os.system("pause")
+            os.system("cls")
 
 
 if __name__ == '__main__':

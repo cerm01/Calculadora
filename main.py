@@ -1,4 +1,7 @@
-
+import os
+import random
+import time
+import keyboard
 
 def menu():
     print("1.- Capturar procesos")
@@ -16,14 +19,9 @@ def validacion_menu(opcion):
     return opcion 
 
 
-def main():
+def main():   
     from captura import captura
     from procesar import procesar
-    import os
-    import random
-    import time
-    import keyboard
-    
 
     operaciones = list()
     primerosperandos = list()

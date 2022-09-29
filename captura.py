@@ -1,40 +1,46 @@
+from main import main
+from validacion import validacion
 
-def captura(programadores, operaciones, primerosperandos, segundosoperandos, tmes, Ids):
-    x = 1
+def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado):
+
+    print("Captura de procesos")
+    print("")
+    num_lotes = int(input("¿Cuántos lotes desea capturar? "))
     y = 1
+    for i in range(0, num_lotes):
         
-    while x != 0:
-        print("Captura de procesos")
         while y != 0:
-            programador = input("Nombre del programador: ")
-            print("Operaciones validas : +, -, *, /, % , **")
-            operacion = str(input("Operación: "))
-            primeroperando = int(input("Primer operando: "))
-            segundooperando = int(input("Segundo operando: "))
-            tme = int(input("Tiempo de ejecución: "))
-            Id = int(input("Id: "))
-            os.system("cls")
-
+                       
+            aleatorio = random.randint(1,6)
+            if aleatorio == 1:
+                operacion = "+"
+            elif aleatorio == 2:
+                operacion = "-"
+            elif aleatorio == 3:
+                operacion = "*"
+            elif aleatorio == 4:
+                operacion = "/"
+            elif aleatorio == 5:
+                operacion = "%"
+            elif aleatorio == 6:
+                operacion = "**"
+            
+            primeroperando = random.randint(0,100)
+            segundooperando = random.randint(0,100)
+            tme = random.randint(6,16)
+            Id = i + 1
+            
+            
             if validacion(operacion, segundooperando, tme, Id, Ids) == 0:
-                programadores.append(programador)
                 operaciones.append(operacion)
                 primerosperandos.append(primeroperando)
                 segundosoperandos.append(segundooperando)
                 tmes.append(tme)
                 Ids.append(Id)
                 y = 0
-            else: 
-                print("No se agregó el proceso")
-                os.system("pause")
-                os.system("cls")
-                
-        x = int(input("¿Desea capturar otro proceso? 1.- Si 2.- No: "))
-        if x == 1:
-            y = 1
-        elif x == 2:
-            x = 0
-        else:
-            print("Opción no válida")
-            os.system("pause")
-            x = 0
-        os.system("cls")
+
+            tt_list.append(0)
+            bandera_resultado.append(0)
+            
+        y = 1
+    os.system("cls")

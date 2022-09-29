@@ -28,8 +28,12 @@ def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lot
             elif aleatorio == 6:
                 operacion = "**"
             
-            primeroperando = random.randint(0,100)
-            segundooperando = random.randint(0,100)
+            if operacion == "**":
+                primeroperando = random.randint(1,6)
+                segundooperando = random.randint(1,6)
+            else:
+                primeroperando = random.randint(0,100)
+                segundooperando = random.randint(0,100)
             tme = random.randint(6,16)
             Id = i + 1
             

@@ -2,8 +2,7 @@ from main import main
 from validacion import validacion
 import os
 import random
-import time
-import keyboard
+
 
 def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado):
 

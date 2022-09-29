@@ -43,7 +43,7 @@ def main():
         opcion = validacion_menu(opcion)
         if opcion == 1:
             os.system("cls")
-            captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado)
+            captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado, tr_list)
         elif opcion == 2:
             os.system("cls")
             procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bandera_resultado, tt_list, tr_list)

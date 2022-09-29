@@ -1,1 +1,1 @@
-# ´Proyecto Seminario de solucion de problemas de sistemas operativos
+# Proyecto Seminario de solucion de problemas de sistemas operativos

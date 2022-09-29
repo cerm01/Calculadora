@@ -46,7 +46,10 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 print("")
                 key =  keyboard.read_key()
                 if key == ('e' or 'E'):
-                    pass
+                    os.system("cls")
+                    lote_ejecucion.append(proceso_ejecucion)
+                    proceso_ejecucion = lote_ejecucion.pop(0)
+
 
                 if key == ('w' or 'W'):
                     os.system("cls")
@@ -57,8 +60,8 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 if key == ('p' or 'P'):
                     while True:
                         os.system("cls")
-                        imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
                         contador_global += 1
+                        imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
                         key =  keyboard.read_key()
                         if key == ('c' or 'C'):
                             break

@@ -1,5 +1,9 @@
 from main import main
-
+from operacion import operacion
+import os
+import random
+import time
+import keyboard
 
 def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bandera_resultado):
     lotes = 0

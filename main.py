@@ -46,7 +46,7 @@ def main():
             captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado)
         elif opcion == 2:
             os.system("cls")
-            procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bandera_resultado)
+            procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bandera_resultado, tt_list, tr_list)
         else:
             print("Opción no válida")
             os.system("pause")

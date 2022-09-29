@@ -1,3 +1,4 @@
+from math import trunc
 from main import main
 
 def operacion(operacion, primeroperando, segundooperando):
@@ -8,8 +9,8 @@ def operacion(operacion, primeroperando, segundooperando):
     elif operacion == "*":
         return primeroperando * segundooperando
     elif operacion == "/":
-        return primeroperando / segundooperando
+        return trunc((primeroperando / segundooperando)*1000)/1000
     elif operacion == "%":
-        return primeroperando % segundooperando
+        return trunc((primeroperando % segundooperando)*1000)/1000
     elif operacion == "**":
         return primeroperando ** segundooperando

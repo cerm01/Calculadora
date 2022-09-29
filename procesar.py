@@ -47,6 +47,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 tt += 1
                 contador_global += 1
                 imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt, contador_global)
+                os.system("cls")
             tt = 0
             procesos_finalizados.append(proceso_ejecucion)
             
@@ -92,5 +93,4 @@ def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_fina
     print("Tiempo total de ejecución: ", contador_global)
     print("")
     time.sleep(1)
-    os.system("cls")
     

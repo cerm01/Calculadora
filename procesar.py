@@ -43,7 +43,6 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 contador_global += 1
                 imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
                 os.system("cls")
-            tt = 0
             procesos_finalizados.append(proceso_ejecucion)
             
                     

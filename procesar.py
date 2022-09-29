@@ -45,6 +45,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
             proceso_ejecucion = lote_ejecucion.pop(0)
             tme = tmes[proceso_ejecucion]
             while tt <= tme:
+                
                 print("Lotes pendientes: ", lotes - cont_lotes-1)
                 print("")
                 print("-----------------")
@@ -97,8 +98,46 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                     os.system("pause")
                 if l == 'p':
                     while True:
+                        os.system("cls")
+                        print("Lotes pendientes: ", lotes - cont_lotes-1)
+                        print("")
+                        print("-----------------")
+                        print("Lote en ejecución")
+                        print("-----------------")
+                        print("")
+                        for i in range (0, len(lote_ejecucion)):
+                            print("ID: ", Ids[lote_ejecucion[i]], "\t", "TME: ", tmes[lote_ejecucion[i]])
+
+                        print("")
+                        print("--------------------")
+                        print("Proceso en ejecución")
+                        print("--------------------")
+                        print("")
+                        print("Operacion: ", primerosperandos[proceso_ejecucion], operaciones[proceso_ejecucion], segundosoperandos[proceso_ejecucion])
+                        print("ID: ", Ids[proceso_ejecucion])
+                        print("TME: ", tmes[proceso_ejecucion])
+                        print("TT: ", tt)
+                        print("TR: ", tmes[proceso_ejecucion] - tt)
+                        
+                        print("")
+                        print("-------------------")
+                        print("Procesos finalizado")
+                        print("-------------------")
+                        print("")
+                        for j in range(0, len(procesos_finalizados)):
+                            print("ID: ", Ids[procesos_finalizados[j]], "\t", "Operacion: ", primerosperandos[procesos_finalizados[j]], operaciones[procesos_finalizados[j]], segundosoperandos[procesos_finalizados[j]], "\t", end="")
+                            
+                            if(bandera_resultado[procesos_finalizados[j]] == 0):
+                                print("Resultado: ", operacion(operaciones[procesos_finalizados[j]], primerosperandos[procesos_finalizados[j]], segundosoperandos[procesos_finalizados[j]]))
+                            if bandera_resultado[procesos_finalizados[j]] == 1:
+                                print("Resultado: ERROR")
+                                
                         time.sleep(1)
                         contador_global += 1
+
+                        print("Tiempo total de ejecución: ", contador_global)
+                        time.sleep(1)
+
                         if keyboard.is_pressed('c'):
                             print('CONTINUAR')
                             break

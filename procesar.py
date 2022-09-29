@@ -34,23 +34,25 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 x = j + 1
                 break
         
+        cont_lotes += 1
         for i in range(0, len(lote_ejecucion)):
             proceso_ejecucion = lote_ejecucion.pop(0)
             while tt_list[proceso_ejecucion] < tmes[proceso_ejecucion]:
                 tt_list[proceso_ejecucion] += 1
+                tr_list[proceso_ejecucion] = tmes[proceso_ejecucion] - tt_list[proceso_ejecucion]
                 contador_global += 1
-                imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global)
+                imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
                 os.system("cls")
             tt = 0
             procesos_finalizados.append(proceso_ejecucion)
             
-        cont_lotes += 1            
-    imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global)
+                    
+    imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
     os.system("pause")
 
 
-def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global):
-    print("Lotes pendientes: ", lotes - cont_lotes-1)
+def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list):
+    print("Lotes pendientes: ", lotes - cont_lotes)
     print("")
     print("-----------------")
     print("Lote en ejecución")
@@ -68,7 +70,7 @@ def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_fina
     print("ID: ", Ids[proceso_ejecucion])
     print("TME: ", tmes[proceso_ejecucion])
     print("TT: ", tt_list[proceso_ejecucion])
-    print("TR: ", tmes[proceso_ejecucion] - tt_list[proceso_ejecucion])
+    print("TR: ", tr_list[proceso_ejecucion])
     
     print("")
     print("-------------------")
@@ -76,7 +78,7 @@ def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_fina
     print("-------------------")
     print("")
     for j in range(0, len(procesos_finalizados)):
-        print("ID: ", Ids[procesos_finalizados[j]], "\t", "Operacion: ", primerosperandos[procesos_finalizados[j]], operaciones[procesos_finalizados[j]], segundosoperandos[procesos_finalizados[j]], "\t", end="")
+        print("ID: ", Ids[procesos_finalizados[j]], "", "\t", "Operacion: ", primerosperandos[procesos_finalizados[j]], operaciones[procesos_finalizados[j]], segundosoperandos[procesos_finalizados[j]], "\t", end="")
         
         if(bandera_resultado[procesos_finalizados[j]] == 0):
             print("Resultado: ", operacion(operaciones[procesos_finalizados[j]], primerosperandos[procesos_finalizados[j]], segundosoperandos[procesos_finalizados[j]]))

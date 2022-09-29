@@ -49,7 +49,10 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                     pass
 
                 if key == ('w' or 'W'):
-                    pass
+                    os.system("cls")
+                    bandera_resultado[proceso_ejecucion] = 1
+                    
+                    break
 
                 if key == ('p' or 'P'):
                     while True:

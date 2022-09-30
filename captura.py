@@ -1,4 +1,3 @@
-from main import main
 from validacion import validacion
 import os
 import random
@@ -8,9 +7,9 @@ def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lot
 
     print("Captura de procesos")
     print("")
-    num_lotes = int(input("¿Cuántos lotes desea capturar? "))
+    num_procesos = int(input("¿Cuántos procesos desea capturar? "))
     y = 1
-    for i in range(0, num_lotes):
+    for i in range(0, num_procesos):
         
         while y != 0:
                        

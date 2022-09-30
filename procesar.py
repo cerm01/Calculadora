@@ -41,29 +41,29 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 tt_list[proceso_ejecucion] += 1
                 tr_list[proceso_ejecucion] = tmes[proceso_ejecucion] - tt_list[proceso_ejecucion]
                 contador_global += 1
+                os.system("cls")
                 imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
                 
                 print("")
-                key =  keyboard.read_key()
-                if key == ('e' or 'E'):
+                
+                if keyboard.is_pressed('e' or 'E'):
                     os.system("cls")
                     lote_ejecucion.append(proceso_ejecucion)
                     proceso_ejecucion = lote_ejecucion.pop(0)
 
 
-                if key == ('w' or 'W'):
+                if keyboard.is_pressed('w' or 'W'):
                     os.system("cls")
                     bandera_resultado[proceso_ejecucion] = 1
                     
                     break
 
-                if key == ('p' or 'P'):
+                if keyboard.is_pressed('p' or 'P'):
                     while True:
                         os.system("cls")
                         contador_global += 1
                         imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
-                        key =  keyboard.read_key()
-                        if key == ('c' or 'C'):
+                        if keyboard.is_pressed('c' or 'C'):
                             break
 
             procesos_finalizados.append(proceso_ejecucion)

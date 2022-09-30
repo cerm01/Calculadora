@@ -1,5 +1,3 @@
-from main import main
-
 def validacion(operacion, segundooperando, tme, Id, Ids):
     valor = 0
     if operacion == "+" or operacion == "-" or operacion == "*" or operacion == "/" or operacion == "%" or operacion =="**":

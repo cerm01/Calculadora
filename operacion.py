@@ -1,5 +1,4 @@
 from math import trunc
-from main import main
 
 def operacion(operacion, primeroperando, segundooperando):
     if operacion == "+":

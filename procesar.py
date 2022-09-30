@@ -15,6 +15,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
     cont = 0
     lote_ejecucion = list()
     procesos_finalizados = list()
+    last = 0
 
     for i in range(0, len(Ids)): 
         acumulador += 1
@@ -42,7 +43,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 tr_list[proceso_ejecucion] = tmes[proceso_ejecucion] - tt_list[proceso_ejecucion]
                 contador_global += 1
                 os.system("cls")
-                imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
+                imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
                 
                 print("")
                 
@@ -62,17 +63,19 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                     while True:
                         os.system("cls")
                         contador_global += 1
-                        imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
+                        imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
                         if keyboard.is_pressed('c' or 'C'):
                             break
 
             procesos_finalizados.append(proceso_ejecucion)
-                       
-    imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list)
+
+    last = 1
+    os.system("cls")        
+    imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
     os.system("pause")
 
 
-def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list):
+def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last):
     print("Lotes pendientes: ", lotes - cont_lotes)
     print("")
     print("-----------------")
@@ -82,16 +85,23 @@ def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_fina
     for i in range (0, len(lote_ejecucion)):
         print("ID: ", Ids[lote_ejecucion[i]], "\t", "TME: ", tmes[lote_ejecucion[i]], "\t", "TT: ", tt_list[lote_ejecucion[i]], "\t", "TR: ", tr_list[lote_ejecucion[i]])
 
-    print("")
-    print("--------------------")
-    print("Proceso en ejecución")
-    print("--------------------")
-    print("")
-    print("Operacion: ", primerosperandos[proceso_ejecucion], operaciones[proceso_ejecucion], segundosoperandos[proceso_ejecucion])
-    print("ID: ", Ids[proceso_ejecucion])
-    print("TME: ", tmes[proceso_ejecucion])
-    print("TT: ", tt_list[proceso_ejecucion])
-    print("TR: ", tr_list[proceso_ejecucion])
+    if last != 1:
+        print("")
+        print("--------------------")
+        print("Proceso en ejecución")
+        print("--------------------")
+        print("")
+        print("Operacion: ", primerosperandos[proceso_ejecucion], operaciones[proceso_ejecucion], segundosoperandos[proceso_ejecucion])
+        print("ID: ", Ids[proceso_ejecucion])
+        print("TME: ", tmes[proceso_ejecucion])
+        print("TT: ", tt_list[proceso_ejecucion])
+        print("TR: ", tr_list[proceso_ejecucion])
+    else: 
+        print("")
+        print("--------------------")
+        print("Proceso en ejecución")
+        print("--------------------")
+        print("")
     
     print("")
     print("-------------------")

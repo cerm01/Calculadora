@@ -80,7 +80,7 @@ def imprimir(lotes, cont_lotes, lote_ejecucion, proceso_ejecucion, procesos_fina
     print("-----------------")
     print("")
     for i in range (0, len(lote_ejecucion)):
-        print("ID: ", Ids[lote_ejecucion[i]], "\t", "TME: ", tmes[lote_ejecucion[i]])
+        print("ID: ", Ids[lote_ejecucion[i]], "\t", "TME: ", tmes[lote_ejecucion[i]], "\t", "TT: ", tt_list[lote_ejecucion[i]], "\t", "TR: ", tr_list[lote_ejecucion[i]])
 
     print("")
     print("--------------------")

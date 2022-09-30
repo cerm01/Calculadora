@@ -4,8 +4,8 @@ import time
 import keyboard
 
 def menu():
-    print("1.- Capturar procesos")
-    print("2.- Procesar lotes")
+    print("1.- Capturar")
+    print("2.- Procesar")
 
 def validacion_menu(opcion):
     if opcion.isnumeric() == False:
@@ -32,10 +32,8 @@ def main():
     Ids = list()
     bandera_resultado = list()
     num_lotes = 0
-    
 
     opcion = 0
-    
 
     while opcion != 2:
         menu()

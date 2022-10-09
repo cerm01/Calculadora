@@ -21,8 +21,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
 
     while len(nuevos) > 0: 
         
-        
-        for i in range(0, len(listo)):
+        for i in range(0, len(listo)+1):
             ejecucion = listo.pop(0)
             while tt_list[ejecucion] < tmes[ejecucion]:
                 tt_list[ejecucion] += 1

@@ -1,7 +1,4 @@
 import os
-import random
-import time
-import keyboard
 
 def menu():
     print("1.- Capturar")
@@ -52,4 +49,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+     main()

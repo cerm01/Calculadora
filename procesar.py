@@ -9,36 +9,19 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
     bloqueado = list()
     finalizados = list()
 
-    lotes = 0
-    acumulador = 0
-    contador_global = 0
-    cont_lotes = 0
-    x = 0  
-    cont = 0
+    contador_global = 0 
     last = 0
 
     for i in range(0, len(Ids)):
-        nuevos.append(Ids[i])
+        nuevos.append(Ids[i]-1)  
 
-    for i in range(0, len(Ids)): 
-        acumulador += 1
-        if acumulador == 3:
-            lotes += 1
-            acumulador = 0
-        elif i == len(Ids) - 1 and acumulador != 0:
-            lotes += 1   
+    for j in range(0, 3):
+        listo.append(nuevos[0])
+        nuevos.pop(0)
 
-    while cont_lotes < lotes: 
-        for j in range(x, len(Ids)):
-            cont += 1
-            if cont <= 3:
-                listo.append(j)
-            if cont == 3:
-                cont = 0
-                x = j + 1
-                break
+    while len(nuevos) > 0: 
         
-        cont_lotes += 1
+        
         for i in range(0, len(listo)):
             ejecucion = listo.pop(0)
             while tt_list[ejecucion] < tmes[ejecucion]:
@@ -46,7 +29,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 tr_list[ejecucion] = tmes[ejecucion] - tt_list[ejecucion]
                 contador_global += 1
                 os.system("cls")
-                imprimir(lotes, cont_lotes, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
+                imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
                 
                 print("")
                 
@@ -66,27 +49,31 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                     while True:
                         os.system("cls")
                         contador_global += 1
-                        imprimir(lotes, cont_lotes, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
+                        imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
                         if keyboard.is_pressed('c' or 'C'):
                             break
 
             finalizados.append(ejecucion)
+            if len(nuevos) > 0:
+                listo.append(nuevos.pop(0))
+            
 
     last = 1
     os.system("cls")        
-    imprimir(lotes, cont_lotes, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
+    imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
     os.system("pause")
 
 
-def imprimir(lotes, cont_lotes, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last):
-    print("Lotes pendientes: ", lotes - cont_lotes)
+def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last):
+    print("Procesos pendientes: ", len(nuevos) ) 
     print("")
     print("-----------------")
     print("Listos")
     print("-----------------")
     print("")
-    for i in range (0, len(listo)):
-        print("ID: ", Ids[listo[i]], "\t", "TME: ", tmes[listo[i]], "\t", "TT: ", tt_list[listo[i]], "\t", "TR: ", tr_list[listo[i]])
+    j = 0
+    for j in range (0, len(listo)):
+        print("ID: ", Ids[listo[j]], "\t", "TME: ", tmes[listo[j]], "\t", "TT: ", tt_list[listo[j]], "\t", "TR: ", tr_list[listo[j]])
 
     if last != 1:
         print("")
@@ -111,6 +98,7 @@ def imprimir(lotes, cont_lotes, listo, ejecucion, finalizados, Ids, tmes, primer
     print("Finalizados")
     print("-------------------")
     print("")
+    j = 0
     for j in range(0, len(finalizados)):
         print("ID: ", Ids[finalizados[j]], "", "\t", "Operacion: ", primerosperandos[finalizados[j]], operaciones[finalizados[j]], segundosoperandos[finalizados[j]], "\t", end="")
         

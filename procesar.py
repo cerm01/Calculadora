@@ -19,24 +19,25 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
         listo.append(nuevos[0])
         nuevos.pop(0)
 
-    while len(nuevos) > 0: 
+    while len(nuevos) + len(listo) > 0: 
         
-        for i in range(0, len(listo)+1):
-            ejecucion = listo.pop(0)
+        for i in range(0, len(listo)):
+            
+            if len(listo) > 0:
+                ejecucion = listo.pop(0)
+
             while tt_list[ejecucion] < tmes[ejecucion]:
+
                 tt_list[ejecucion] += 1
                 tr_list[ejecucion] = tmes[ejecucion] - tt_list[ejecucion]
                 contador_global += 1
                 os.system("cls")
                 imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
                 
-                print("")
-                
                 if keyboard.is_pressed('e' or 'E'):
                     os.system("cls")
                     listo.append(ejecucion)
                     ejecucion = listo.pop(0)
-
 
                 if keyboard.is_pressed('w' or 'W'):
                     os.system("cls")

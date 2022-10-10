@@ -31,8 +31,6 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 os.system("cls")
                 imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
                 
-                print("")
-                
                 if keyboard.is_pressed('e' or 'E'):
                     os.system("cls")
                     listo.append(ejecucion)

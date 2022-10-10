@@ -9,6 +9,8 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
     bloqueado = list()
     finalizados = list()
 
+    tiempo_bloqueado = list()
+
     contador_global = 0 
     last = 0
 
@@ -30,26 +32,43 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
 
                 tt_list[ejecucion] += 1
                 tr_list[ejecucion] = tmes[ejecucion] - tt_list[ejecucion]
-                contador_global += 1
-                os.system("cls")
-                imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
-                
-                if keyboard.is_pressed('e' or 'E'):
-                    os.system("cls")
-                    listo.append(ejecucion)
-                    ejecucion = listo.pop(0)
 
-                if keyboard.is_pressed('w' or 'W'):
+                for j in range(0, len(bloqueado)):
+                    tiempo_bloqueado[j] += 1
+
+                if len(bloqueado) > 0:
+                    if tiempo_bloqueado[0] == 7:
+                        tiempo_bloqueado.pop(0)
+                        listo.append(bloqueado[0])
+                        bloqueado.pop(0)
+
+                contador_global += 1
+
+                os.system("cls")
+                imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
+                #leer tecla presionada
+                x = keyboard.read_key()
+
+                if x == ('e' or 'E'):
+                    os.system("cls")
+                    if len(bloqueado)<3:
+                        bloqueado.append(ejecucion)
+                        tiempo_bloqueado.append(0)
+                        if len(listo) > 0:
+                            ejecucion = listo.pop(0)
+                    
+
+                if x == ('w' or 'W'):
                     os.system("cls")
                     bandera_resultado[ejecucion] = 1
                     
                     break
 
-                if keyboard.is_pressed('p' or 'P'):
+                if x == ('p' or 'P'):
                     while True:
                         os.system("cls")
                         contador_global += 1
-                        imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
+                        imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
                         if keyboard.is_pressed('c' or 'C'):
                             break
 
@@ -60,11 +79,11 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
 
     last = 1
     os.system("cls")        
-    imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last)
+    imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
     os.system("pause")
 
 
-def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last):
+def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado):
     print("Procesos pendientes: ", len(nuevos) ) 
     print("")
     print("-----------------")
@@ -92,7 +111,17 @@ def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos,
         print("Ejecución")
         print("--------------------")
         print("")
-    
+
+    print("")
+    print("-------------------")
+    print("Bloqueados")
+    print("-------------------")
+    print("")
+
+    for k in range(0, len(bloqueado)):
+        print("ID: ", Ids[bloqueado[k]], "\t", "Tiempo bloqueado: ", tiempo_bloqueado[k])
+
+        
     print("")
     print("-------------------")
     print("Finalizados")

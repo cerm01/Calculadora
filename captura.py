@@ -33,7 +33,7 @@ def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lot
             else:
                 primeroperando = random.randint(0,100)
                 segundooperando = random.randint(0,100)
-            tme = random.randint(1,6)
+            tme = random.randint(6,16)
             Id = i + 1
             
             

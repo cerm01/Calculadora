@@ -29,6 +29,7 @@ def main():
     Ids = list()
     bandera_resultado = list()
     num_lotes = 0
+    bandera_captura = False
 
     opcion = 0
 
@@ -39,9 +40,14 @@ def main():
         if opcion == 1:
             os.system("cls")
             captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado, tr_list)
-        elif opcion == 2:
+            bandera_captura = True
+        elif opcion == 2 and bandera_captura == True:
             os.system("cls")
             procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bandera_resultado, tt_list, tr_list)
+        elif opcion == 2 and bandera_captura == False:
+            print("No se ha capturado")
+            os.system("pause")
+            os.system("cls")
         else:
             print("Opción no válida")
             os.system("pause")

@@ -21,6 +21,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
     t_respuesta = list()
     t_espera = list()
     t_servicio = list()
+
     #---------------------------------------------------------
     for i in range(0, len(Ids)):
         t_llegada.append(-1)
@@ -54,14 +55,16 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
 
             while tt_list[ejecucion] < tmes[ejecucion]:
                 
+                #---------- tiempo de respuesta ----------------
                 if t_respuesta[ejecucion] == -1:
                     t_respuesta[ejecucion] = contador_global
-                
-                contador_global += 1
+                #------------------------------------------------
 
-                for j in range(0, len(bloqueado)):
-                    tiempo_bloqueado[j] += 1
+                #------------------------------------------------
+                contador_global += 1
+                #------------------------------------------------
                 
+                #------------------------------------------------               
                 if len(bloqueado) > 0:
                     if tiempo_bloqueado[0] == 7 and len(bloqueado) == 3:
                         listo.append(bloqueado[0])
@@ -77,11 +80,21 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                 if len(bloqueado)< 3:
                     tt_list[ejecucion] += 1
                     tr_list[ejecucion] = tmes[ejecucion] - tt_list[ejecucion]
+                #------------------------------------------------
 
+                #------------------------------------------------
+                for j in range(0, len(bloqueado)):
+                    tiempo_bloqueado[j] += 1
+                #------------------------------------------------
+
+                #------------------------------------------------
                 os.system("cls")
                 imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
-
-                if keyboard.is_pressed('e' or 'E'):
+                #------------------------------------------------
+                
+                #------------------------------------------------
+                
+                if keyboard.is_pressed ('e' or 'E'):
                     if len(bloqueado)<3 and tr_list[ejecucion] > 0:
                         bloqueado.append(ejecucion)
                         tiempo_bloqueado.append(0)
@@ -102,13 +115,15 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                         imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
                         if keyboard.is_pressed('c' or 'C'):
                             break
+                #------------------------------------------------
 
+            #------------------------------------------------
             finalizados.append(ejecucion)
-            
             t_finalizacion[ejecucion] = contador_global
             t_retorno[ejecucion] = t_finalizacion[ejecucion] - t_llegada[ejecucion]
-            t_espera[ejecucion] = t_respuesta[ejecucion] - t_llegada[ejecucion]
-            t_servicio[ejecucion] = t_retorno[ejecucion] - t_espera[ejecucion]
+            t_servicio[ejecucion] = tt_list[ejecucion]
+            t_espera[ejecucion] = t_retorno[ejecucion] - t_servicio[ejecucion]
+            #------------------------------------------------
 
             if len(nuevos) > 0:
                 new = nuevos.pop(0)
@@ -124,7 +139,7 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
     os.system("cls")        
     imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
     os.system("pause")
-    tiempos(Ids, tmes, primerosperandos, operaciones, segundosoperandos, t_llegada, t_finalizacion, t_retorno, t_respuesta, t_espera, t_servicio)
+    tiempos(Ids, tmes, tt_list, tr_list, primerosperandos, operaciones, segundosoperandos, t_llegada, t_finalizacion, t_retorno, t_respuesta, t_espera, t_servicio, bandera_resultado, finalizados)
     os.system("pause")
 
 def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado):
@@ -167,9 +182,16 @@ def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos,
     print("")
     print("Tiempo total de ejecución: ", contador_global)
     print("")
-    time.sleep(1)
+    time.sleep(0.5)
 
-def tiempos(Ids, tmes, primerosperandos, operaciones, segundosoperandos, t_llegada, t_finalizacion, t_retorno, t_respuesta, t_espera, t_servicio):
-    print("ID", "\t", "TME", "\t", "Operacion", "\t", "TLL", "\t", "TF", "\t", "TR", "\t", "RESP", "\t", "TE", "\t", "TS")
+
+
+def tiempos(Ids, tmes, tt_list, tr_list, primerosperandos, operaciones, segundosoperandos, t_llegada, t_finalizacion, t_retorno, t_respuesta, t_espera, t_servicio, bandera_resultado, finalizados):
+    print("ID", "\t", "TME", "\t", "TT", "\t", "TR", "\t", "TLL", "\t", "TF", "\t", "TR", "\t", "RESP", "\t", "TE", "\t", "TS", "\t", "Operacion", "\t", "Resultado")
     for i in range(0, len(Ids)):
-        print (Ids[i], "\t", tmes[i], "\t", primerosperandos[i], operaciones[i], segundosoperandos[i], "\t", t_llegada[i], "\t", t_finalizacion[i], "\t", t_retorno[i], "\t", t_respuesta[i], "\t", t_espera[i], "\t", t_servicio[i])
+        print (Ids[i], "\t", tmes[i], "\t", tt_list[i], "\t", tr_list[i], "\t", t_llegada[i], "\t", t_finalizacion[i], "\t", t_retorno[i], "\t", t_respuesta[i], "\t", t_espera[i], "\t", t_servicio[i], "\t", end="")
+        print("   ", primerosperandos[i], operaciones[i], segundosoperandos[i], "\t" , end="")
+        if(bandera_resultado[finalizados[i]] == 0):
+            print(operacion(operaciones[finalizados[i]], primerosperandos[finalizados[i]], segundosoperandos[finalizados[i]]))
+        if bandera_resultado[finalizados[i]] == 1:
+            print("  ERROR")

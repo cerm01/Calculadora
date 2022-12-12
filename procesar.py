@@ -1,7 +1,11 @@
 from operacion import operacion
+from nuevo import nuevo
+from main import main
 import os
 import time
 import keyboard
+import pysrt
+from math import trunc
 
 def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bandera_resultado, tt_list, tr_list):
     nuevos = list()
@@ -115,10 +119,27 @@ def procesar(operaciones, primerosperandos, segundosoperandos, tmes, Ids, bander
                         imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos, operaciones, segundosoperandos, bandera_resultado, tt_list, contador_global, tr_list, last, tiempo_bloqueado, bloqueado)
                         if keyboard.is_pressed('c' or 'C'):
                             break
+                
+                if keyboard.is_pressed ('n' or 'N'):
+                    nuevo(operaciones, primerosperandos, segundosoperandos, tmes, Ids, tt_list, bandera_resultado, tr_list)
+                    t_llegada.append(-1)
+                    t_finalizacion.append(-1)
+                    t_retorno.append(-1)
+                    t_respuesta.append(-1)
+                    t_espera.append(-1)
+                    t_servicio.append(-1)
+                    nuevos.append(Ids[len(Ids)-1]-1)
+                
+                if keyboard.is_pressed ('b' or 'B'):
+                    tiempos(Ids, tmes, tt_list, tr_list, primerosperandos, operaciones, segundosoperandos, t_llegada, t_finalizacion, t_retorno, t_respuesta, t_espera, t_servicio, bandera_resultado, finalizados)
+                    while True:
+                        if keyboard.is_pressed('c' or 'C'):
+                            break
                 #------------------------------------------------
 
             #------------------------------------------------
             finalizados.append(ejecucion)
+            bandera_resultado[ejecucion] = 0
             t_finalizacion[ejecucion] = contador_global
             t_retorno[ejecucion] = t_finalizacion[ejecucion] - t_llegada[ejecucion]
             t_servicio[ejecucion] = tt_list[ejecucion]
@@ -187,11 +208,52 @@ def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos,
 
 
 def tiempos(Ids, tmes, tt_list, tr_list, primerosperandos, operaciones, segundosoperandos, t_llegada, t_finalizacion, t_retorno, t_respuesta, t_espera, t_servicio, bandera_resultado, finalizados):
-    print("ID", "\t", "TME", "\t", "TT", "\t", "TR", "\t", "TLL", "\t", "TF", "\t", "TR", "\t", "RESP", "\t", "TE", "\t", "TS", "\t", "Operacion", "\t", "Resultado")
+    
+    txt =  "{:<4}{:<5}{:<4}{:<4}{:<5}{:<5}{:<5}{:<11}{:<5}{:<5}{:<11}{:<11}"
+    
+    
+    print(txt.format("ID", "TME", "TT", "TR", "TLL", "TF", "TR", "RESPUESTA", "TE", "TS", "OPERACIÓN", "RESULTADO"))
+
     for i in range(0, len(Ids)):
-        print (Ids[i], "\t", tmes[i], "\t", tt_list[i], "\t", tr_list[i], "\t", t_llegada[i], "\t", t_finalizacion[i], "\t", t_retorno[i], "\t", t_respuesta[i], "\t", t_espera[i], "\t", t_servicio[i], "\t", end="")
-        print("   ", primerosperandos[i], operaciones[i], segundosoperandos[i], "\t" , end="")
-        if(bandera_resultado[finalizados[i]] == 0):
-            print(operacion(operaciones[finalizados[i]], primerosperandos[finalizados[i]], segundosoperandos[finalizados[i]]))
-        if bandera_resultado[finalizados[i]] == 1:
-            print("  ERROR")
+        print("{:<4}".format(Ids[i]), end="")
+        print("{:<5}".format(tmes[i]), end="")
+        print("{:<4}".format(tt_list[i]), end="")
+        print("{:<4}".format(tr_list[i]), end="")
+
+        print("{:<5}".format(t_llegada[i]) if t_llegada[i] != -1 else "{:<5}".format("N/A"), end="")
+        print("{:<5}".format(t_finalizacion[i]) if t_finalizacion[i] !=-1 else "{:<5}".format("N/A"), end="")
+        print("{:<5}".format(t_retorno[i]) if t_retorno[i] != -1 else "{:<5}".format("N/A"), end="")
+        print("{:<11}".format(t_respuesta[i]) if t_respuesta[i] != -1 else "{:<11}".format("N/A"), end="")
+        print("{:<5}".format(t_espera[i]) if t_espera[i] != -1 else "{:<5}".format("N/A"), end="")
+        print("{:<5}".format(t_servicio[i]) if t_servicio[i] != -1 else "{:<5}".format("N/A"), end="")
+        operacion = str(primerosperandos[i]) + operaciones[i] + str(segundosoperandos[i])
+        print("{:<11}".format(operacion), end="")
+    
+        
+        if (len(finalizados) > 0 and len(finalizados)>= i + 1) and (bandera_resultado[finalizados[i]] == 0):
+            operacion = operaciones[finalizados[i]]
+            primeroperando = primerosperandos[finalizados[i]]
+            segundooperando = segundosoperandos[finalizados[i]]
+
+            if operacion == "+":
+                resulado = primeroperando + segundooperando
+            elif operacion == "-":
+                resulado = primeroperando - segundooperando
+            elif operacion == "*":
+                resulado = primeroperando * segundooperando
+            elif operacion == "/":
+                resulado =  trunc((primeroperando / segundooperando)*1000)/1000
+            elif operacion == "%":
+                resulado =  trunc((primeroperando % segundooperando)*1000)/1000
+            elif operacion == "**":
+                resulado = primeroperando ** segundooperando
+
+            print("{:<11}".format(resulado))
+        elif (len(finalizados) > 0 and len(finalizados)>= i + 1) and (bandera_resultado[finalizados[i]] == 1):
+            print("{:<11}".format("ERROR"))
+        else:
+            print("{:<11}".format("N/A"))
+
+
+
+

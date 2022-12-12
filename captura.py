@@ -3,7 +3,7 @@ import os
 import random
 
 
-def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lotes, tt_list, bandera_resultado, tr_list):
+def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, tt_list, bandera_resultado, tr_list):
 
     print("Captura de procesos")
     print("")
@@ -47,7 +47,7 @@ def captura(operaciones, primerosperandos, segundosoperandos, tmes, Ids, num_lot
 
             tt_list.append(0)
             tr_list.append(0)
-            bandera_resultado.append(0)
+            bandera_resultado.append(-1)
             
         y = 1
     os.system("cls")

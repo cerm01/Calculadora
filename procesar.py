@@ -182,7 +182,7 @@ def imprimir(nuevos, listo, ejecucion, finalizados, Ids, tmes, primerosperandos,
     print("")
     print("Tiempo total de ejecución: ", contador_global)
     print("")
-    time.sleep(0.5)
+    time.sleep(0.8)
 
 
 
